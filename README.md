@@ -1,6 +1,6 @@
 # Azure Batch HPC (Big Compute) Lab
-Microsoft EMEA Big Compute (HPC) Team - <mailto:EMEABlackbeltHPCTSPs @ microsoft.com>
-Initial versions by Karl Podesta - September 2017
+* Microsoft EMEA Big Compute (HPC) Team - <mailto:EMEABlackbeltHPCTSPs @ microsoft.com>
+* Initial versions by Karl Podesta, September 2017
 
 ## 1. Introduction
 
@@ -15,9 +15,11 @@ Azure Batch can handle workloads on any point of the parallel and distributed pr
 
 ## 2. Install & Setup
 1. Login to Azure
-2. Create an Azure Batch account
-3. Download the "Batch Labs" GUI tool (beta) [optional]
-4. Download the Azure CLI
+2. Create an Azure Batch account (or use an existing one)
+3. Create an Azure Storage account (or use an existing one)
+4. Change/Review Azure limits
+5. Download the "Batch Labs" GUI tool (beta) [optional]
+6. Download the Azure CLI
 
 ## 3. Access & Use
 
@@ -26,7 +28,16 @@ Azure Batch can handle workloads on any point of the parallel and distributed pr
 ## 5. Scaling & Measurement
 
 ## 6. Scenarios
+* __Azure Batch for Rendering:__ https://docs.microsoft.com/en-us/azure/batch/batch-rendering-service
+* __Azure Batch for AI:__  
+* __Data Analytics - R and doAzureParallel:__
 
 ## 7. Links & References
+* <a href="https://docs.microsoft.com/en-us/azure/batch/">Azure Batch Service</a> - High level information about the Azure Batch service
+* <a href="https://github.com/Azure/batch-shipyard">Azure Batch Shipyard</a> - Azure Batch + Docker containers = easy solutions!
+* <a href="https://github.com/Azure/azure-batch-cli-extensions">Azure Batch CLI extensions (preview)</a> - new functionality for the Azure CLI!
+* Azure Batch Labs (beta) - GUI tool to monitor & manage Azure Batch workloads
+* <a href="https://docs.microsoft.com/en-us/azure/storage/storage-use-azcopy">AzCopy (Windows)</a> - command line tool for copying data to Azure, fast!
+* <a href="https://docs.microsoft.com/en-us/azure/storage/storage-use-azcopy-linux">AzCopy (Linux)</a> - command line tool for copying data to Azure, fast!
 
 
