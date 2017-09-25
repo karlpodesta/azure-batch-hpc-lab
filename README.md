@@ -99,13 +99,13 @@ Before uploading files to Azure, we will have to find some files to upload! Here
 	cp big_buck_bunny_720p_30mb.mp4 big_buck_bunny9_720p_30mb.mp4
 	cp big_buck_bunny_720p_30mb.mp4 big_buck_bunny10_720p_30mb.mp4
 
-Take a look at these uploaded files, via Azure Storage Explorer: 
-
-![Azure Storage Explorer with MP4 video files](azure-storage-mp4.png)
-
 Now that we have some video sample .mp4 files, we are ready to upload these to Azure Batch: 
 
 	az batch file upload --local-path . --file-group ffmpeg-input --account-name myazurebatch --account-endpoint myazurebatch.westeurope.batch.azure.com
+
+Take a look at these uploaded files, via Azure Storage Explorer: 
+
+![Azure Storage Explorer with MP4 video files](azure-storage-mp4.png)
 
 ### 4.3 Check templates
 
@@ -124,6 +124,10 @@ See the command below to create the pool. Also note the input required to the te
 	poolId (The pool id ): ffmpeg
 	nodeCount (The number of pool nodes): 2
 	You are using an experimental feature {Package Management}.
+
+See if your pool was created, via BatchLabs: 
+
+![Azure Batch pool](batchlabs-pools.png)
 
 ### 4.5 Run a job
 
