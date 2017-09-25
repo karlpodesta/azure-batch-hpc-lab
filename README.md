@@ -160,6 +160,7 @@ Go to the Azure Storage Explorer. Go to your Storage account, then your Batch St
 * Can you imagine other scenarios you would use this for in your work? (e.g. Fiji/ImageJ, CellProfiler)
 
 ## 6. Other Scenarios
+* __Azure Batch with Containers:__ <a href="https://github.com/Azure/batch-shipyard/blob/master/docs/02-batch-shipyard-quickstart.md">Azure Batch Shipyard - Get Started</a>
 * __Azure Batch for Rendering:__ <a href="https://docs.microsoft.com/en-us/azure/batch/batch-rendering-service">Azure Batch Rendering Service</a>
 * __Azure Batch for AI:__ <a href="https://batchaitraining.azure.com/">Azure Batch AI (preview)</a>
 * __Data Analytics - R and doAzureParallel:__ <a href="https://azure.microsoft.com/en-us/blog/doazureparallel/">doAzureParallel - directly from R session</a>
