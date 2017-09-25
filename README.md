@@ -5,7 +5,7 @@
 ## 1. Introduction
 
 ### 1.1  The Lab
-This is a technical lab to help you get started with Azure Batch. You will log in to Azure, initiate Azure Batch, and run a few jobs.  You will learn about some of the different methods for doing this, and some of the different jobs you could run.  You will also learn where to get more information, and how to dig deeper for your particular use case.  The Lab should take approx 90 minutes to complete.  
+This is a technical lab to help you get started with Azure Batch. You will log in to Azure, initiate Azure Batch, and run a sample job.  You will learn about some of the different methods for doing this, and some of the different jobs you could run.  You will also learn where to get more information, and how to dig deeper for your particular use case.  The Lab should take approx 90 minutes to complete.  
 
 Please share any thoughts, feedback, or improvements - this is a work in progress, and we want to make sure it helps you to get started in the right way with Azure Batch! 
 
@@ -26,10 +26,10 @@ The following steps will be needed for setup:
 7. Create a workstation (and connect to it)
 
 ### 2.1 Login to Azure
-You can access Azure via <a href"https://portal.azure.com">https://portal.azure.com</a>.  You may have a subscription already.  If not, you can sign up for a subscription. 
+You can access Azure via <a href="https://portal.azure.com">https://portal.azure.com</a>.  You may have a subscription already.  If not, you can sign up for a subscription. 
 
 ### 2.2 Create an Azure Batch account (or use an existing one)
-In the Azure Portal, go to "+ New", type "Azure Batch", and select "Batch Service". Click "create" and enter an account name, and a resource group where this Azure Batch account will live.  Full details for creating an Azure Batch account are at this link: <a href="https://docs.microsoft.com/en-us/azure/batch/batch-account-create-portal">Create Azure Batch</a>. 
+In the Azure Portal, go to "+ New", type "Azure Batch", and select "Batch Service". Click "Create" and enter an account name, and a resource group where this Azure Batch account will live.  Full details for creating an Azure Batch account are at this link: <a href="https://docs.microsoft.com/en-us/azure/batch/batch-account-create-portal">Create Azure Batch</a>. 
 
 ### 2.3 Create an Azure Storage account (or use an existing one)
 In the Azure Portal, go to "Storage accounts", click "+ Add", and enter the details.  You should only need to enter a "Name" and a "Resource Group" - the other default values should be fine. 
@@ -39,7 +39,7 @@ There are default quotas and limits that apply to your Azure Batch account.  See
 You can find further details on that webpage for changing these quotas.  For our workshop, we can use the quotas we have already. 
 
 ### 2.5 Download the "Batch Labs" GUI tool (beta) 
-You can download a recent build of "Batch Labs" for Windows from this GitHub repository. 
+You can download a recent build of "Batch Labs" for Windows from this GitHub repository (See "BatchLabs Setup 0.7.0.exe" file). 
 If you want to get the very latest version, and compile the code yourself, the link for that is here: <a href="https://github.com/Azure/BatchLabs/releases">Azure Batch Labs (beta)</a>.
 
 ### 2.6 Download the "Azure Storage Explorer" GUI tool
@@ -113,6 +113,9 @@ We are using "pool-ffmpeg.json" and "job-ffmpeg.json". You can find these in thi
 
 Download these files to your Linux workstation.  Review the files with "less pool-ffmpeg.json" (for example).  
 
+	wget https://raw.githubusercontent.com/karlpodesta/azure-batch-hpc-lab/master/pool-ffmpeg.json
+	wget https://raw.githubusercontent.com/karlpodesta/azure-batch-hpc-lab/master/job-ffmpeg.json
+
 The "pool-ffmpeg" will help us create a pool of Linux workstations to run on.  The "job-ffmpeg" will help us create our job.  
 
 ### 4.4 Create a pool
@@ -147,7 +150,7 @@ In Azure BatchLabs, click "Jobs". You should see a list of jobs on the left pane
 
 ### 4.7 Collect and view results
 
-Go to the Azure Storage Explorer. Go to your Storage account, then your Batch Storage account, then "Blobs". You should see "fgrp-ffmpeg-output".  If you click on this, you will see a list of transcoded videos - the output of your job. 
+Go to the Azure Storage Explorer. Go to your Storage account, then your Batch Storage account, then "Blobs". You should see "fgrp-ffmpeg-output".  If you click on this, you will see a list of transcoded videos - the output of your job.  You can also see the output via BatchLabs. 
 
 ## 5. Improving the job
 
