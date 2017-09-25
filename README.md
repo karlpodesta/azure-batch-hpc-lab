@@ -51,14 +51,111 @@ __Warning: you may want to shut down your Linux workstation when you complete th
 
 ## 3. Access & Use
 
-## 4. Azure Batch Shipyard
+Connect to your new Linux workstation via SSH.  You can use command line (e.g. on Linux, or on Windows with WSL installed), or e.g. PuTTY on Windows.  The PuTTY tool is available for download from here: <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html">PuTTY download</a>. 
 
-## 5. Scaling & Measurement
+![Connect to Linux via SSH](linux-vm-ssh.png)
 
-## 6. Scenarios
-* __Azure Batch for Rendering:__ https://docs.microsoft.com/en-us/azure/batch/batch-rendering-service
-* __Azure Batch for AI:__  
-* __Data Analytics - R and doAzureParallel:__
+Load up Azure BatchLabs, select your subscription, and your storage account. 
+
+![Azure Batch Labs](azure-batch-labs.png)
+
+## 4. Complete an Azure Batch job
+
+We will be following instructions to <a href="https://docs.microsoft.com/en-us/azure/batch/batch-cli-templates">Run Batch jobs without code</a>. 
+
+The following steps will be followed to complete a job: 
+1. Upgrade the Azure CLI
+2. Upload files to Azure Batch
+3. Check templates
+4. Create a pool
+5. Run a job
+6. Monitor a job
+7. Collect and view results
+
+### 4.1 Upgrade the Azure CLI 
+
+You will need to upgrade the "Azure CLI" package on your Linux workstation: 
+	sudo apt-get update
+	sudo apt-get upgrade azure-cli
+
+Check your Azure Login is working: 
+	az login
+	az account list
+
+### 4.2 Upload files to Azure Batch
+
+Before uploading files to Azure, we will have to find some files to upload! Here, we download a sample video (.mp4) file. We copy this a number of times to give us some input video samples for our job. 
+
+	mkdir samples
+	cd samples
+	wget http://sample-videos.com/video/mp4/720/big_buck_bunny_720p_30mb.mp4
+	cp big_buck_bunny_720p_30mb.mp4 big_buck_bunny2_720p_30mb.mp4
+	cp big_buck_bunny_720p_30mb.mp4 big_buck_bunny3_720p_30mb.mp4
+	cp big_buck_bunny_720p_30mb.mp4 big_buck_bunny4_720p_30mb.mp4
+	cp big_buck_bunny_720p_30mb.mp4 big_buck_bunny5_720p_30mb.mp4
+	cp big_buck_bunny_720p_30mb.mp4 big_buck_bunny6_720p_30mb.mp4
+	cp big_buck_bunny_720p_30mb.mp4 big_buck_bunny7_720p_30mb.mp4
+	cp big_buck_bunny_720p_30mb.mp4 big_buck_bunny8_720p_30mb.mp4
+	cp big_buck_bunny_720p_30mb.mp4 big_buck_bunny9_720p_30mb.mp4
+	cp big_buck_bunny_720p_30mb.mp4 big_buck_bunny10_720p_30mb.mp4
+
+Take a look at these uploaded files, via Azure Storage Explorer: 
+
+![Azure Storage Explorer with MP4 video files](azure-storage-mp4.png)
+
+Now that we have some video sample .mp4 files, we are ready to upload these to Azure Batch: 
+
+	az batch file upload --local-path . --file-group ffmpeg-input --account-name myazurebatch --account-endpoint myazurebatch.westeurope.batch.azure.com
+
+### 4.3 Check templates
+
+We are using "pool-ffmpeg.json" and "job-ffmpeg.json". You can find these in this GitHub repo.
+
+Download these files to your Linux workstation.  Review the files with "less pool-ffmpeg.json" (for example).  
+
+The "pool-ffmpeg" will help us create a pool of Linux workstations to run on.  The "job-ffmpeg" will help us create our job.  
+
+### 4.4 Create a pool
+
+See the command below to create the pool. Also note the input required to the template (i.e. "poolId" and "nodeCount"). 
+
+	msadmin@bigcomputebench:~$ az batch pool create --template pool-ffmpeg.json --account-name myazurebatch --account-endpoint myazurebatch.westeurope.batch.azure.com
+	You are using an experimental feature {Pool Template}.
+	poolId (The pool id ): ffmpeg
+	nodeCount (The number of pool nodes): 2
+	You are using an experimental feature {Package Management}.
+
+### 4.5 Run a job
+
+Here, we will actually run the job. 
+
+	msadmin@bigcomputebench:~$ az batch job create --template job-ffmpeg.json --account-name myazurebatch --account-endpoint myazurebatch.westeurope.batch.azure.com
+	You are using an experimental feature {Job Template}.
+	jobId (The name of Azure Batch job): bunny
+	poolId (The name of Azure Batch pool which runs the job): ffmpeg
+	You are using an experimental feature {Task Factory}.
+
+### 4.6 Monitor a job
+
+In Azure BatchLabs, click "Jobs". You should see a list of jobs on the left panel. Click on a job. From here you can go to "Job Statistics", to see more information about the job.  Click "Job Progress" to see an overview graph of the completed job. 
+
+![Azure Batch Labs Job Progress](batchlabs-jobprogress.png)
+
+### 4.7 Collect and view results
+
+Go to the Azure Storage Explorer. Go to your Storage account, then your Batch Storage account, then "Blobs". You should see "fgrp-ffmpeg-output".  If you click on this, you will see a list of transcoded videos - the output of your job. 
+
+## 5. Improving the job
+
+* What could be done to improve the job? 
+* What will happen as we scale? (bigger videos, larger videos)
+* What is the difference between "one job with many tasks" and "many jobs with one task"?
+* Can you imagine other scenarios you would use this for in your work? (e.g. Fiji/ImageJ, CellProfiler)
+
+## 6. Other Scenarios
+* __Azure Batch for Rendering:__ <a href="https://docs.microsoft.com/en-us/azure/batch/batch-rendering-service">Azure Batch Rendering Service</a>
+* __Azure Batch for AI:__ <a href="https://batchaitraining.azure.com/">Azure Batch AI (preview)</a>
+* __Data Analytics - R and doAzureParallel:__ <a href="https://azure.microsoft.com/en-us/blog/doazureparallel/">doAzureParallel - directly from R session</a>
 
 ## 7. Links & References
 * <a href="https://docs.microsoft.com/en-us/azure/batch/">Azure Batch Service</a> - High level information about the Azure Batch service
